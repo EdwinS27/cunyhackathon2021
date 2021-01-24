@@ -10,11 +10,11 @@
 </head>
 <body>
 <div id="main">
-<form >
+<form name='userInfo'>
     <h1 id='text'>
         Enter your name
     </h1>
-    <input type="text" id="nameInput">
+    <input type="text" id="nameInput" name='nameInput'>
     <br>
     <h1 id='text'>
         What is your age group?
@@ -74,7 +74,7 @@
     Resistance Training<input type="radio" name="workout" id="">
     Both<input type="radio" name="workout" id="">
     <br>
-    <input type="button" value="submit">
+    <input type="button" value="submit" onClick="doSubmit()">
 </form>
 </div>
 </body>
