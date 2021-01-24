@@ -1,0 +1,453 @@
+{
+  "intents": [
+    {
+      "intent": "Exercise",
+      "examples": [
+        {
+          "text": "how can exercise help"
+        },
+        {
+          "text": "how can exercising help?"
+        },
+        {
+          "text": "why diet"
+        },
+        {
+          "text": "why exercise"
+        },
+        {
+          "text": "why exercise and diet"
+        },
+        {
+          "text": "why is diet and exercise important?"
+        },
+        {
+          "text": "why should i exercise"
+        },
+        {
+          "text": "why should i watch my diet"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Fitness_Goals",
+      "examples": [
+        {
+          "text": "does this app work"
+        },
+        {
+          "text": "How can the app help me"
+        },
+        {
+          "text": "How can you help?"
+        },
+        {
+          "text": "How to meet my fitness goals"
+        },
+        {
+          "text": "why should i use this app"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Goodbyes",
+      "examples": [
+        {
+          "text": "Bye"
+        },
+        {
+          "text": "c ya"
+        },
+        {
+          "text": "Goodbye"
+        },
+        {
+          "text": "nope. Bye"
+        },
+        {
+          "text": "nope. That's all for today"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greeting",
+      "examples": [
+        {
+          "text": "Good Evening"
+        },
+        {
+          "text": "Good Morning"
+        },
+        {
+          "text": "Good Night"
+        },
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hey"
+        },
+        {
+          "text": "Morning"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Results",
+      "examples": [
+        {
+          "text": "how are my results determined"
+        },
+        {
+          "text": "how does the app work"
+        },
+        {
+          "text": "how is my evaluation done"
+        },
+        {
+          "text": "how is the information collected used to determine my results"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Thank_You",
+      "examples": [
+        {
+          "text": "cheers"
+        },
+        {
+          "text": "Thanks"
+        },
+        {
+          "text": "thank you"
+        },
+        {
+          "text": "thx"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Prompt",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1611463223880",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1611456584734",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1611456584745",
+      "previous_sibling": "handler_4_1611456584745"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_8_1611456584734",
+      "event_name": "input",
+      "dialog_node": "handler_4_1611456584745"
+    },
+    {
+      "type": "standard",
+      "title": "Diet_and_Exercise",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Diet and exercise are two of the most effective tools that can be used to attain your fitness goals. $name I believe our \"about us\" page will provide a great deal of information about this question."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1611462051911"
+      },
+      "conditions": "#Exercise",
+      "dialog_node": "node_10_1611459638646",
+      "previous_sibling": "node_8_1611461196005"
+    },
+    {
+      "type": "standard",
+      "title": "Thank_You ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "My pleasure."
+              },
+              {
+                "text": "I aim to please. 😊"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_2_1611463223880",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_9_1611463530192"
+      },
+      "conditions": "#Thank_You",
+      "dialog_node": "node_1_1611463720491"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Is there anything else I can help you with?"
+              },
+              {
+                "text": "Please let me know if I can help you with something else."
+              },
+              {
+                "text": "Will that be all for today?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "dialog_node": "node_2_1611462051911",
+      "previous_sibling": "node_10_1611459638646"
+    },
+    {
+      "type": "folder",
+      "title": "ChitChat",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1611463223880",
+      "previous_sibling": "node_2_1611462051911"
+    },
+    {
+      "type": "standard",
+      "title": "Thank_You  - copy 1",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "My pleasure."
+              },
+              {
+                "text": "I aim to please. 😊"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_2_1611463223880",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1611463720491"
+      },
+      "conditions": "#Thank_You",
+      "dialog_node": "node_2_1611464071424",
+      "previous_sibling": "node_1_1611463720491"
+    },
+    {
+      "type": "standard",
+      "title": "Results ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "This app uses a special set of data analysis and algorithm which is designed to give you the most accurate and personalized fitness results and guidance possible.  $name, you should check out our \"evaluation page\" for a free evaluation. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1611462051911"
+      },
+      "conditions": "#Results",
+      "dialog_node": "node_8_1611461196005",
+      "previous_sibling": "node_9_1611458474197"
+    },
+    {
+      "type": "standard",
+      "title": "Collect Name",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Welcome $name. You can ask me about how our app may help you attain your fitness goals, why it is important to exercise and eat healthy or how your information is used to determine your results. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "context": {
+        "name": "<? input.text.substring(0, 1).toUpperCase() + input.text.substring(1) ?>"
+      },
+      "conditions": "true",
+      "dialog_node": "node_9_1611456438376",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Fitness_Goals",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Great question $name! Our app is specially designed to listen to your wants and give you an overview of where you stand, along with personalized steps you should take in order to achieve your overall fitness goals. \n\nFor more information visit our \"About us\" Page"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1611462051911"
+      },
+      "conditions": "#Fitness_Goals",
+      "dialog_node": "node_9_1611458474197",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Goodbye",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Goodbye $name! It was a pleasure assisting you today."
+              },
+              {
+                "text": "Thank you for chatting with me today $name, Goodbye!"
+              },
+              {
+                "text": "Stay safe $name, Goodbye!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_2_1611463223880",
+      "conditions": "#Thank_You",
+      "dialog_node": "node_9_1611463530192",
+      "previous_sibling": "node_2_1611464071424"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1611456438376",
+      "dialog_node": "slot_8_1611456584734"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I'm BestBody Bot. What name may I call you by?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "BestBod Bot",
+  "language": "en",
+  "description": ""
+}
