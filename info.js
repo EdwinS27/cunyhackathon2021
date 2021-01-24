@@ -72,16 +72,16 @@ const tryAgain = (array) => {
 const getWorkout = () =>{
     let numberExercises;
     if (document.userInfo.expWorkingOut[0].checked)
-	    numberExercises = 3;
+	    numberExercises = 2;
 	if (document.userInfo.expWorkingOut[1].checked)
-	    numberExercises = 4;
+	    numberExercises = 3;
 	if (document.userInfo.expWorkingOut[2].checked)
-	    numberExercises = 5;
+	    numberExercises = 4;
     // getting legs
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
-            finalWorkOutArray.push(legs[randomNum]);
+        if(i == 0)
+            finalWorkOutArray[0] = legs[randomNum];
         else{
             let check = checkArray(legs[randomNum]);
             if(check)
@@ -93,71 +93,54 @@ const getWorkout = () =>{
     // getting back
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
+        let check = checkArray(back[randomNum]);
+        if(check)
+            finalWorkOutArray.push(tryAgain(back));
+        else
             finalWorkOutArray.push(back[randomNum]);
-        else{
-            let check = checkArray(back[randomNum]);
-            if(check)
-                finalWorkOutArray.push(tryAgain(back))
-            else
-                finalWorkOutArray.push(back[randomNum])
-        }
     }
     // getting chest
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
+        let check = checkArray(chest[randomNum]);
+        if(check)
+            finalWorkOutArray.push(tryAgain(chest));
+        else
             finalWorkOutArray.push(chest[randomNum]);
-        else{
-            let check = checkArray(chest[randomNum]);
-            if(check)
-                finalWorkOutArray.push(tryAgain(chest))
-            else
-                finalWorkOutArray.push(chest[randomNum])
-        }
     }
     // getting arms
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
-            finalWorkOutArray.push(arms[randomNum]);
-        else{
-            let check = checkArray(arms[randomNum]);
-            if(check)
-                finalWorkOutArray.push(tryAgain(arms))
-            else
-                finalWorkOutArray.push(arms[randomNum])
-        }
+        let check = checkArray(arms[randomNum]);
+        if(check)
+            finalWorkOutArray.push(tryAgain(arms))
+        else
+            finalWorkOutArray.push(arms[randomNum])
+        
     }
     // getting shoulders
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
+        let check = checkArray(shoulders[randomNum]);
+        if(check)
+            finalWorkOutArray.push(tryAgain(shoulders));
+        else
             finalWorkOutArray.push(shoulders[randomNum]);
-        else{
-            let check = checkArray(shoulders[randomNum]);
-            if(check)
-                finalWorkOutArray.push(tryAgain(shoulders))
-            else
-                finalWorkOutArray.push(shoulders[randomNum])
-        }
     }
     // getting core
     for(let i = 0; i < numberExercises; i ++){
         let randomNum = getRandomNum();
-        if(finalWorkOutArray < 1)
-            finalWorkOutArray.push(core[randomNum]);
-        else{
-            let check = checkArray(core[randomNum]);
-            if(check)
-                finalWorkOutArray.push(tryAgain(core))
-            else
-                finalWorkOutArray.push(core[randomNum])
-        }
+        let check = checkArray(core[randomNum]);
+        if(check)
+            finalWorkOutArray.push(tryAgain(core))
+        else
+            finalWorkOutArray.push(core[randomNum])
     }
     let workoutPlan = "";
     for(let i = 0; i < finalWorkOutArray.length; i++){
         workoutPlan += `<li> ${finalWorkOutArray[i]} </li>`;
+        if(i % numberExercises == 0 && i != 0)
+            workoutPlan += `<hr>`;
     }
     document.getElementById('finalResults').innerHTML = workoutPlan;
 }
