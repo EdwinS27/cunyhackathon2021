@@ -1,31 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>
+    BestBody
+</title>
+<link rel="stylesheet" href='style.css'>
 </head>
 <body>
+<div id="main">
+<form>
+    <h1 id='text'>
+        Enter your name
+    </h1>
+    <input type="text" id="nameInput">
+    <br>
+    <h1 id='text'>
+        What is your age group?
+    </h1>
+    18 - 24 <input type='radio' name='ageGroup'>
+    <br>
+    25 - 34 <input type='radio' name='ageGroup'>
+    <br>
+    45 - 54 <input type='radio' name='ageGroup'>
+    <br>
+    55 + <input type='radio' name='ageGroup'>
+    <br>
     <h1>
-        How many days a week can you work out?
+        What is your current height?
     </h1>
     <input type="text">
+    <br>
     <h1>
-        What is your current weight & height?
+        What is your current weight?
     </h1>
     <input type="text">
+    <br>
     <h1>
         What is your goal weight?
     </h1>
     <input type="text">
     <br>
     <h1>
-        Experience working out?
+        What is your experience working out?
     </h1>
-    <input  name='expWorkingOut' type="radio" onclick="one('b')" id='beginner' >
-    <input  name='expWorkingOut' type="radio" onclick="one('i')" id='intermediate' >
-    <input  name='expWorkingOut' type="radio" onclick="one('a')" id='advanced' >
+    <br>
+    Beginner<input  name='expWorkingOut' type="radio">
+    Intermediate<input  name='expWorkingOut' type="radio">
+    Advanced<input  name='expWorkingOut' type="radio">
+    <br>
     <h1>
         Desired Time Frame
     </h1>
-    <input type="range" name="" id="">
+    <br>
+    1 month<input type="radio" name="timeFrame">
+    3 months<input type="radio" name="timeFrame">
+    6 months<input type="radio" name="timeFrame">
+    12 months<input type="radio" name="timeFrame">
+    <br>
     <h1>
         What is your desired outcome?
     </h1>
@@ -37,11 +68,10 @@
     <h1>
         Work out preferences
     </h1>
-    <br>
-    <input type="radio" name="workout" id="">
-    <br>
-    <input type="radio" name="workout" id="">
-    <br>
-    <input type="radio" name="workout" id="">
+    Cardio<input type="radio" name="workout" id="">
+    Resistance Training<input type="radio" name="workout" id="">
+    Both<input type="radio" name="workout" id="">
+</form>
+</div>
 </body>
-</hmtl>
+</html>
