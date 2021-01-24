@@ -5,13 +5,189 @@
     BestBody
 </title>
 <link rel="stylesheet" href='style.css'>
-<script src="formValidation.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src='info.js'></script>
+<script>
+let userName, userWeight, userHeight, userAge, userGoal, userExp, userTimeFrame;
+let missing = "";
+function doClear(){
+	document.userInfo.firstName.value = "";
+	document.userInfo.ageGroup[0].checked = false;
+	document.userInfo.ageGroup[1].checked = false;
+	document.userInfo.ageGroup[2].checked = false;
+	document.userInfo.ageGroup[3].checked = false;
+	document.userInfo.expWorkingOut[0].checked = false;
+	document.userInfo.expWorkingOut[1].checked = false;
+	document.userInfo.expWorkingOut[2].checked = false;
+	document.userInfo.timeFrame[0].checked = false;
+	document.userInfo.timeFrame[1].checked = false;
+	document.userInfo.timeFrame[2].checked = false;
+	document.userInfo.timeFrame[3].checked = false;
+	document.userInfo.workout[0].checked = false;
+	document.userInfo.workout[1].checked = false;
+	document.userInfo.workout[2].checked = false;
+	missing = "";
+	return;
+}
+
+function verifyInfo(){
+	if(checkName() == false){
+	alert(missing);
+	return;
+    }
+	if(validateAgeGroup() == false){
+	alert(missing);
+	return;
+    }
+	if(validateExp() == false){
+	alert(missing);
+	return;
+    }
+	if(validateTimeFrame() == false){
+	alert(missing);
+	return;
+    }
+	if(validateWorkOutPref() == false){
+	alert(missing);
+	return;
+    }
+    $('main').html(`<input type="button" onClick='sendInfoToPhp()'>`);
+}
+
+const checkName = () => {
+    let name = document.userInfo.nameInput;
+    if(name.value == ""){
+        missing = "Please enter your name";
+        name.focus();
+        return false;
+    }
+    else
+        return true;
+}
+const validateAgeGroup = () =>{
+    if (document.userInfo.ageGroup[0].checked)
+	    return true;
+	if (document.userInfo.ageGroup[1].checked)
+	    return true;
+	if (document.userInfo.ageGroup[2].checked)
+	    return true;
+	if (document.userInfo.ageGroup[3].checked)
+	    return true;
+    else{
+        missing = "Please select your age group";
+	    return false;
+	}
+}
+const validateExp = () =>{
+    if (document.userInfo.expWorkingOut[0].checked)
+	    return true;
+	if (document.userInfo.expWorkingOut[1].checked)
+	    return true;
+	if (document.userInfo.expWorkingOut[2].checked)
+	    return true;
+    else{
+        missing = "Please select your experience with working out";
+	    return false;
+	}
+}
+const validateTimeFrame = () =>{
+    if (document.userInfo.timeFrame[0].checked)
+	    return true;
+	if (document.userInfo.timeFrame[1].checked)
+	    return true;
+	if (document.userInfo.timeFrame[2].checked)
+	    return true;
+	if (document.userInfo.timeFrame[3].checked)
+	    return true;
+    else{
+        missing = "Please select the time frame you wish to work with";
+	    return false;
+	}
+}
+const validateWorkOutPref = () =>{
+    if (document.userInfo.workout[0].checked)
+	    return true;
+	if (document.userInfo.workout[1].checked)
+	    return true;
+	if (document.userInfo.workout[2].checked)
+	    return true;
+    else{
+        missing = "Please select your desired work out preference";
+	    return false;
+	}
+}
+const getInfo = () =>{
+    if(document.userInfo.ageGroup[0].checked)
+        userAge = 1;
+    if(document.userInfo.ageGroup[1].checked)
+        userAge = 2;
+    if(document.userInfo.ageGroup[2].checked)
+        userAge = 3;
+    if(document.userInfo.ageGroup[3].checked)
+        userAge = 4;
+    if(document.userInfo.ageGroup[5].checked)
+        userAge = 5;
+    
+
+    if(document.userInfo.heightMetrics[0].checked)
+        userHeight = parseInt(document.userInfo.userHeight.value) * 2.54;
+    else
+        userHeight = parseInt(document.userInfo.userHeight.value);
+
+    
+    if(document.userInfo.weightMetrics[0].checked)
+        userWeight = parseInt(document.userInfo.userWeight.value) * 0.45359237;
+    else
+        userWeight = parseInt(document.userInfo.userWeight.value);
+
+    if(document.userInfo.goalWeightMetrics[0].checked)
+        userWeight = parseInt(document.userInfo.goalWeight.value) * 0.45359237;
+    else
+        userWeight = parseInt(document.userInfo.goalWeight.value);
+
+
+    if(document.userInfo.goalWeightMetrics[0].checked)
+        userGoal = parseInt(document.userInfo.goalWeight.value) * 0.45359237;
+    else
+        userGoal = parseInt(document.userInfo.goalWeight.value);
+    
+    if(document.userInfo.expWorkingOut[0].checked)
+        userExp = 1;
+    if(document.userInfo.expWorkingOut[1].checked)
+        userExp = 2;
+    if(document.userInfo.expWorkingOut[2].checked)
+        userExp = 3;
+
+    
+    if(document.userInfo.timeFrame[0].checked)
+        userTimeFrame = 1;
+    if(document.userInfo.timeFrame[1].checked)
+        userTimeFrame = 2;
+    if(document.userInfo.timeFrame[2].checked)
+        userTimeFrame = 3;
+    if(document.userInfo.timeFrame[2].checked)
+        userTimeFrame = 4;
+}
+
+const sendInfoToPhp = () => {
+    $("#main").html("");
+    $.ajax(
+        {
+            //set up the parameters
+            url: "info.php",
+            data: "userAge="+userAge,
+            success: function(serverdata){
+                //display the server data at placeholder
+                $("#finalResults").html(serverdata);
+            }
+        });
+        //+ "userHeight="+userHeight + "userWeight="+userWeight +"userGoal="+userGoal +"userExp="+userExp +"userTimeFrame="+userTimeFrame
+}
+</script>
 </head>
 <body>
 <div id="main">
-<form name='userInfo'>
+<form name='userInfo' onchange='getInfo()' >
+    <!-- <input type="button" value="TEST" onclick='t()'> -->
     <h1 id='text'>
         Enter your name
     </h1>
@@ -24,6 +200,8 @@
     <br>
     25 - 34 <input type='radio' name='ageGroup'>
     <br>
+    33 - 44 <input type='radio' name='ageGroup'>
+    <br>
     45 - 54 <input type='radio' name='ageGroup'>
     <br>
     55 + <input type='radio' name='ageGroup'>
@@ -31,7 +209,7 @@
     <h1>
         What is your current height?
     </h1>
-    <input type="text">
+    <input type="text" id='userHeight' name='userHeight'>
     <br>
     in<input type="radio" name="heightMetrics" id="" checked>
     cm<input type="radio" name="heightMetrics" id="">
@@ -39,7 +217,7 @@
     <h1>
         What is your current weight?
     </h1>
-    <input type="text">
+    <input type="text" id='userWeight' name='userWeight'>
     <br>
     lb<input type="radio" name="weightMetrics" id="" checked>
     kg<input type="radio" name="weightMetrics" id="">
@@ -47,7 +225,7 @@
     <h1>
         What is your goal weight?
     </h1>
-    <input type="text">
+    <input type="text" name='goalWeight'>
     <br>
     lb<input type="radio" name="goalWeightMetrics" id="" checked>
     kg<input type="radio" name="goalWeightMetrics" id="">
@@ -84,10 +262,10 @@
     Resistance Training<input type="radio" name="workout" id="">
     Both<input type="radio" name="workout" id="">
     <br>
-    <input type="button" value="submit" onClick="doSubmit()">
-    <input type="button" value="submit" onClick="getWorkout()">
+    <input type="button" onClick="verifyInfo()">
 </form>
 </div>
+<div id='getFinalResults'></div>
 <div id='finalResults'></div>
 </body>
 </html>
